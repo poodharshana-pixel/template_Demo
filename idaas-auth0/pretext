@@ -1,0 +1,6 @@
+npm create vite@latest idaas-auth0 -- --template react
+cd idaas-auth0
+npm install
+cd C:\Users\poo_d\idaas-auth0
+npm install @auth0/auth0-react
+npm run dev
