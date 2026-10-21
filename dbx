@@ -1,0 +1,65 @@
+%pip install dropbox
+python -m pip install dropbox
+python -m pip install notebook dropbox
+jupyter notebook
+python -m notebook
+
+
+import dropbox
+print("Dropbox library is installed successfully!")
+Open the Dropbox App Console.
+Sign in to your Dropbox account.
+Click Create app.
+Select Scoped access.
+Choose App folder access (enough for this experiment).
+Enter an app name, such as JupyterStorageApp, and create it.
+
+1. Open your app in the Dropbox App Console.
+2. Click the Permissions tab.
+3. Tick these three permissions:
+files.content.write.
+files.content.read
+files.metadata.read
+4. Scroll down and click Submit to save the permissions. 
+Step 2 — Generate the access token
+1. Open the Settings tab.
+2. Find the OAuth 2 section.
+3. Locate Generated access token and click Generate.
+
+Open your Dropbox_API_Experiment.ipynb notebook and create a new code cell. Paste this code:
+import dropbox
+from getpass import getpass
+token = getpass("Enter your Dropbox access token: ")
+dbx = dropbox.Dropbox(token)
+print("Dropbox connection object created successfully!")
+  
+with open("myfile.txt", "w") as f:
+    f.write("Hello! This is my Dropbox API experiment.")
+print("Sample file created successfully!")
+
+# Upload the file to Dropbox
+with open("myfile.txt", "rb") as f:
+    dbx.files_upload(f.read(), "/myfile.txt")
+print("File uploaded to Dropbox successfully!")
+
+import dropbox
+from getpass import getpass
+token = getpass("Enter your Dropbox access token: ")
+dbx = dropbox.Dropbox(token)
+print("Dropbox connection object created successfully!")
+  
+with open("myfile.txt", "rb") as f:
+    result = dbx.files_upload(f.read(), "/myfile.txt")
+print("Upload successful!")
+print("Uploaded file:", result.path_display)
+
+# Download the file from Dropbox
+metadata, response = dbx.files_download("/myfile.txt")
+# Save the downloaded content locally
+with open("downloaded_myfile.txt", "wb") as f:
+    f.write(response.content)
+print("File downloaded successfully!")
+# Display the downloaded content
+with open("downloaded_myfile.txt", "r") as f:
+    print(f.read())
+
