@@ -1,0 +1,5 @@
+python -m pip install dropbox
+python -m pip show dropbox
+cd folder
+python upload.py
+python download.py
